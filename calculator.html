@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body{
+        background-color: black;
+        font-family: Arial;
+      }
+      .calculate{
+        color: white;
+        font-size: 45px;
+        margin-top: 15px;
+        margin-bottom: 5px;
+      }
+      .operators{
+        background-color: rgb(254,160,10);
+        color: white;
+        border: none;
+        height: 60px;
+        width: 60px;
+        font-size: 26px;
+        border-radius: 60px;
+        cursor:pointer;
+        margin-right: 10px;
+      }
+      .others{
+        background-color: rgb(51, 51, 51);
+        color: white;
+        border: none;
+        height: 60px;
+        width: 60px;
+        font-size: 26px;
+        border-radius: 60px;
+        cursor:pointer;
+        margin-right: 10px;
+      }
+      .clear{
+        font-size: 17px;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="js-display calculate"></p>
+    <p>
+      <button onclick="
+        updateCalculation('1');
+      " class="others">1</button>
+
+      <button onclick="
+        updateCalculation('2');
+      " class="others">2</button>
+
+      <button onclick="
+        updateCalculation('3');
+      " class="others">3</button>
+
+      <button onclick="
+        updateCalculation(' + ');
+      " class="operators">+</button>
+    </p>
+
+    <p>
+      <button onclick="
+        updateCalculation('4');
+      " class="others">4</button>
+
+      <button onclick="
+        updateCalculation('5');
+      " class="others">5</button>
+
+      <button onclick="
+        updateCalculation('6');
+      " class="others">6</button>
+
+      <button onclick="
+        updateCalculation(' - ');
+      " class="operators">-</button>
+    </p>
+
+    <p>
+      <button onclick="
+        updateCalculation('7');
+      " class="others">7</button>
+
+      <button onclick="
+        updateCalculation('8');
+      " class="others">8</button>
+
+      <button onclick="
+        updateCalculation('9');
+      " class="others">9</button>
+
+      <button onclick="
+        updateCalculation(' * ');  
+      " class="operators">*</button>
+    </p>
+
+    <p>
+      <button onclick="
+        updateCalculation('0');
+      " class="others">0</button>
+
+      <button onclick="
+        updateCalculation('.');
+      " class="others">.</button>
+
+      <button onclick="
+        // Note: eval() takes a string and runs it as code.
+        // Avoid using eval() in real world projects since
+        // it can potentially be given harmful code to run.
+        // Only use eval() for learning purposes.
+        updateCalculation('=');
+      " class="others">=</button>
+
+      <button onclick="
+        updateCalculation(' / ');
+      " class="operators">/</button>
+    </p>
+
+    <p>
+      <button onclick="
+        updateCalculation('');
+        localStorage.removeItem('calculation');
+      " class="others clear">Clear</button>
+    </p>
+
+    <script>
+      let calculation = localStorage.getItem('calculation')||'';
+      displayCalculation();
+      function updateCalculation(symbol){
+        if(symbol==='=')
+          calculation=eval(calculation);
+        else if(symbol=='')
+          calculation='';
+        else
+          calculation+=symbol;
+        displayCalculation();
+      localStorage.setItem('calculation',calculation);
+      }
+      function displayCalculation(){
+        document.querySelector('.js-display').innerHTML=`${calculation}`;
+      }
+    </script>
+  </body>
+</html>
